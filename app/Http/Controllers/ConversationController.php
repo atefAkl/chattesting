@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Conversation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class ConversationController extends Controller
@@ -67,5 +68,22 @@ class ConversationController extends Controller
     public function destroy(Conversation $conversation)
     {
         //
+    }
+
+    /**
+     * get conversation between two users
+     */
+    public function startChat($user_id)
+    {
+        $conversation = Conversation::where(['receiver' => $user_id, 'sender' => Auth::user()->id])
+            ->orWhere(['receiver' => Auth::user()->id, 'sender' => $user_id])
+            ->firstOrCreate([
+                'receiver' => $user_id,
+                'sender' => Auth::user()->id
+            ]);
+        return Response::json([
+            'status' => 'success',
+            'data' => $conversation
+        ]);
     }
 }

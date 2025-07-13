@@ -1,0 +1,300 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+    font-family: "Figtree", sans-serif;
+}
+
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1877f2;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: #65676b;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-link:hover {
+    background-color: #f0f2f5;
+}
+
+.main-container {
+    display: flex;
+    margin-top: 56px;
+    min-height: calc(100vh - 56px);
+}
+
+.sidebar {
+    width: 280px;
+    padding: 1rem;
+    position: fixed;
+    top: 56px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+    background-color: #f0f2f5;
+}
+
+.sidebar-left {
+    left: 0;
+}
+
+.sidebar-right {
+    right: 0;
+}
+
+.content {
+    flex: 1;
+    padding: 1rem;
+    margin-left: 280px;
+    margin-right: 280px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    color: #050505;
+}
+
+.sidebar-item:hover {
+    background-color: #e4e6eb;
+}
+
+.sidebar-item-icon {
+    margin-right: 0.5rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e4e6e9;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    object-fit: cover;
+}
+
+.post-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.post-content {
+    margin-bottom: 0.5rem;
+}
+
+.post-actions {
+    display: flex;
+    border-top: 1px solid #e4e6eb;
+    padding-top: 0.5rem;
+}
+
+.post-action {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #65676b;
+}
+
+.post-action:hover {
+    background-color: #f0f2f5;
+}
+
+/* RTL Specific Styles */
+html[dir="rtl"] .sidebar-left {
+    right: 0;
+    left: auto;
+}
+
+html[dir="rtl"] .sidebar-right {
+    left: 0;
+    right: auto;
+}
+
+html[dir="rtl"] .content {
+    margin-right: 280px;
+    margin-left: 280px;
+}
+
+html[dir="rtl"] .sidebar-item-icon {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+html[dir="rtl"] .user-avatar {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+#users {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
+.user-card {
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative; /* ضروري لتحديد موضع القائمة المنسدلة */
+    cursor: pointer; /* للإشارة إلى أنه يمكن التفاعل معه بالماوس */
+    transition: all 0.5s ease; /* إضافة تأثير انتقال سلس للظل */
+}
+
+.user-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ظل خفيف عند التمرير */
+}
+
+.user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.dropdown {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: all 0.5s ease;
+}
+
+.dropdown-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0; /* إخفاء الزر افتراضياً */
+    transition: all 0.5s ease; /* تأثير انتقال سلس للشفافية */
+}
+
+.user-card:hover .dropdown-toggle {
+    opacity: 1; /* إظهار الزر عند التمرير على الكارت */
+}
+
+.dropdown-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 1000;
+    display: none; /* إخفاء القائمة افتراضياً */
+    position: absolute; /* تحديد الموضع بالنسبة للعنصر الأب */
+    right: 0; /* محاذاة لليمين */
+    top: 100%; /* أسفل الزر مباشرة */
+    transform: translateY(5px); /* إزاحة بسيطة للأسفل */
+}
+
+.user-card:hover .dropdown-menu {
+    display: block; /* إظهار القائمة عند التمرير على الكارت */
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333;
+    white-space: nowrap; /* منع التفاف النص */
+}
+
+.dropdown-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* Chat box below the page */
+.chat-widget {
+    transition: all 0.3s ease-in-out;
+    transform: translateY(100%); /* Start hidden below the screen */
+    opacity: 0;
+    pointer-events: none; /* Disable interaction when hidden */
+}
+
+.chat-widget.open {
+    transform: translateY(0); /* Move up when open */
+    opacity: 1;
+    pointer-events: auto; /* Enable interaction when open */
+}
+
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+}
+
+.message-bubble {
+    margin-bottom: 0.75rem; /* mb-3 */
+    padding: 0.75rem; /* p-3 */
+    border-radius: 0.5rem; /* rounded-lg */
+    max-width: 80%;
+}
+
+.message-bubble.user {
+    background-color: #dbeafe; /* bg-blue-100 */
+    color: #1e40af; /* text-blue-800 */
+    margin-left: auto; /* self-end ml-auto */
+    border-bottom-right-radius: 0; /* rounded-br-none */
+}
+
+.message-bubble.system {
+    background-color: #e5e7eb; /* bg-gray-200 */
+    color: #374151; /* text-gray-800 */
+    margin-right: auto; /* self-start mr-auto */
+    border-bottom-left-radius: 0; /* rounded-bl-none */
+}
