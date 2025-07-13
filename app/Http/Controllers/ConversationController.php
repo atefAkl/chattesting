@@ -79,11 +79,15 @@ class ConversationController extends Controller
             ->orWhere(['receiver' => Auth::user()->id, 'sender' => $user_id])
             ->firstOrCreate([
                 'receiver' => $user_id,
-                'sender' => Auth::user()->id
+                'sender' => Auth::user()->id,
+                'status' => 'active'
             ]);
+        $conversation->update([
+            'is_open' => true
+        ]);
         return Response::json([
             'status' => 'success',
-            'data' => $conversation
+            'data' => $conversation->load('messages')
         ]);
     }
 }

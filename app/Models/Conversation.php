@@ -10,7 +10,12 @@ class Conversation extends Model
     protected $fillable = [
         'receiver',
         'sender',
+        'status',
+        'is_open',
+    ];
 
+    protected $casts = [
+        'is_open' => 'boolean',
     ];
 
     public $timestamps = true;
