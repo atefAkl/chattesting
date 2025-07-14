@@ -157,7 +157,7 @@
             <ul class="dropdown-menu" aria-labelledby="userCardDropdown">
                 <li><a class="dropdown-item" href="{{ route('users-show-profile', $user->id) }}">عرض البروفايل</a></li>
                 <li><a class="dropdown-item" href="{{ route('users-send-friend-request', $user->id) }}">إرسال طلب صداقة</a></li>
-                <li><a class="dropdown-item toggle-chat" data-user-id="{{ $user->id }}">إرسال رسالة</a></li>
+                <li><a class="dropdown-item toggle-chat" data-user-id="{{ $user->id }}" data-user-name="{{ $user->name }}" data-user-avatar="{{ $user->profile->avatar ?? asset('assets/images/defaultAvatar.jpeg') }}">إرسال رسالة</a></li>
             </ul>
         </div>
     </div>

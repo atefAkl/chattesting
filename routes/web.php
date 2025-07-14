@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +22,19 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [UserProfileController::class, 'show'])->name('profile');
 
-    Route::get('/users/online', [ConversationController::class, 'onlineUsers'])->name('online-users');
-    Route::get('/users/conversations', [ConversationController::class, 'index'])->name('conversations');
-    Route::get('/users/conversations/{id}', [ConversationController::class, 'startChat'])->name('start-chat');
-    Route::get('/users/conversations/{id}/send-message', [ConversationController::class, 'sendMessage'])->name('send-message');
-    Route::get('/users/conversations/{id}/delete-message', [ConversationController::class, 'deleteMessage'])->name('delete-message');
-    Route::get('/users/conversations/{id}/typing', [ConversationController::class, 'userTyping'])->name('user-typing');
-    Route::get('/users/conversations/{id}/stop-typing', [ConversationController::class, 'userStopTyping'])->name('user-stop-typing');
+    // الشات والمحادثات
+    Route::prefix('conversations')->name('chat.')->group(function () {
+        Route::get('/', [ConversationController::class, 'index'])->name('index');
+        Route::get('/{user_id}', [ConversationController::class, 'startChat'])->name('start');
+        Route::post('/{conversation_id}/send', [ConversationController::class, 'sendMessage'])->name('send');
+        Route::get('/{conversation_id}/load-more', [ConversationController::class, 'loadMoreMessages'])->name('load-more');
+        Route::post('/{conversation_id}/close', [ConversationController::class, 'closeChat'])->name('close');
+    });
+    
+    // الإشعارات
+    Route::prefix('notifications')->name('notifications.')->group(function () {
+        Route::get('/', [NotificationController::class, 'getNotifications'])->name('get');
+        Route::post('/{id}/read', [NotificationController::class, 'markAsRead'])->name('read');
+        Route::post('/read-all', [NotificationController::class, 'markAllAsRead'])->name('read-all');
+    });
 });
